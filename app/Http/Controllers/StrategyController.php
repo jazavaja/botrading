@@ -16,6 +16,7 @@ class StrategyController extends Controller
     public function doingAnalytics()
     {
         Telegram::removeAlert();
+//        Pair::all()->get();
         $pair = Pair::get();
         foreach ($pair as $item)
         {

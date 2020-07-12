@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Jobs\Tests;
+
 class Test extends Controller
 {
-    public function testaddJob(){
-//        echo "javad";
-//        for ($i=0;$i<1000;$i++){
-//            Tests::dispatch();
-//        }
-
-    }
-    public function testWork(){
-
+    public function testAddJob()
+    {
+        for ($i=0;$i<100;$i++)
+        {
+            Tests::dispatch();
+        }
     }
 }
