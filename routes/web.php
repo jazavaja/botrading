@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,7 @@ Route::get('/work',function ()
     Artisan::call('queue:work');
 });
 Route::get("/",function (){
-    echo "aa";
+    return view('dashboard');
 });
 Route::get("/test","Test@testaddJob");
 
