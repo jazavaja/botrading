@@ -56,6 +56,7 @@ class ComposerStaticInit244bbef317724bb2bed6c48f29337553
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
+            'Tests\\' => 6,
         ),
         'S' => 
         array (
@@ -209,6 +210,10 @@ class ComposerStaticInit244bbef317724bb2bed6c48f29337553
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
             0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
+        ),
+        'Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
@@ -554,6 +559,7 @@ class ComposerStaticInit244bbef317724bb2bed6c48f29337553
         'App\\Http\\Controllers\\IndicatorController' => __DIR__ . '/../..' . '/app/Http/Controllers/IndicatorController.php',
         'App\\Http\\Controllers\\StrategyController' => __DIR__ . '/../..' . '/app/Http/Controllers/StrategyController.php',
         'App\\Http\\Controllers\\Telegram' => __DIR__ . '/../..' . '/app/Http/Controllers/Telegram.php',
+        'App\\Http\\Controllers\\Test' => __DIR__ . '/../..' . '/app/Http/Controllers/Test.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -564,7 +570,7 @@ class ComposerStaticInit244bbef317724bb2bed6c48f29337553
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Jobs\\SendAnalysis' => __DIR__ . '/../..' . '/app/Jobs/SendAnalysis.php',
-        'App\\Jobs\\Test' => __DIR__ . '/../..' . '/app/Jobs/Test.php',
+        'App\\Jobs\\Tests' => __DIR__ . '/../..' . '/app/Jobs/Tests.php',
         'App\\Notify' => __DIR__ . '/../..' . '/app/Notify.php',
         'App\\Pair' => __DIR__ . '/../..' . '/app/Pair.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -5469,6 +5475,9 @@ class ComposerStaticInit244bbef317724bb2bed6c48f29337553
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
         'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
+        'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
+        'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
+        'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',
         'TheSeer\\Tokenizer\\NamespaceUri' => __DIR__ . '/..' . '/theseer/tokenizer/src/NamespaceUri.php',
