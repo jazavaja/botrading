@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e291ad35-3822-4a6b-9a5e-c0c9944d07ea" name="bot_old" url="http://195.248.240.17/">
+        <fileTransfer host="195.248.240.17" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="8c8409b7-76b4-4b65-84f2-99ad1e122a10" name="xs" url="http://171.22.26.130:2222/">
+        <fileTransfer host="171.22.26.47" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

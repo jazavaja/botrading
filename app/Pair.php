@@ -15,6 +15,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Pair whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Pair wherePair($value)
  * @mixin \Eloquent
+ * @property string $type
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Pair whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Pair whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Pair whereUpdatedAt($value)
  */
 class Pair extends Model
 {

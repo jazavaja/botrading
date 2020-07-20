@@ -21,6 +21,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Notify whereTimeNotify($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Notify whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property string $timeframe
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notify whereTimeframe($value)
  */
 class Notify extends Model
 {

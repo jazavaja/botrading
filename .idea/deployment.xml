@@ -2,7 +2,21 @@
 <project version="4">
   <component name="PublishConfigData">
     <serverData>
+      <paths name="bot_old">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="vpsbot">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="xs">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

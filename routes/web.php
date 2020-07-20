@@ -1,29 +1,43 @@
 <?php
 
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 Route::get('/start','StrategyController@doingAnalytics');
+
 Route::get('/work',function ()
 {
     Storage::disk('log')->delete('laravel.log');
     Artisan::call('queue:work');
 });
-Route::get("/",function (){
-    return view('dashboard');
+
+Route::get('/',function ()
+{
+   redirect('/login');
 });
-Route::get("/test","Test@testaddJob");
+
+Route::get('/logout',function (){
+    Auth::logout();
+    return redirect('login');
+});
+
+Route::get('/dashboard', 'HomeController@index');
+
+Route::get('/',function (){
+    return redirect('/login');
+});
+Route::post('/login','Login@loginPost');
+
+Route::get('/login','Login@viewLogin');
+
+Route::get('/we',function (){
+    $user = new App\User();
+    $user->password = Hash::make('javad123');
+    $user->email = 'javadesmesh@gmail.com';
+    $user->name = 'Javad';
+    $user->save();
+});
 
