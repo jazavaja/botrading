@@ -7,6 +7,7 @@ use App\Jobs\Test;
 use App\Notify;
 use App\Pair;
 use Artisan;
+use PhpParser\JsonDecoder;
 
 
 class StrategyController extends Controller
@@ -16,11 +17,54 @@ class StrategyController extends Controller
     public function doingAnalytics()
     {
         Telegram::removeAlert();
-//        Pair::all()->get();
         $pair = Pair::get();
-        foreach ($pair as $item)
-        {
+        foreach ($pair as $item) {
             SendAnalysis::dispatch($item);
+        }
+    }
+
+    public function collionEMAprice($ema, $ma, $low, $high)
+    {
+        if (($ma >= $low && $ma < $high) || ($ema >= $low && $ema < $high)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function volumePositive($close, $open)
+    {
+        if ($close > $open) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function strategyFarshad($symbol, $timeFrame)
+    {
+        $indicator = new IndicatorController();
+        $exchange = new Exchange();
+        $ma150 = $indicator->getMa_Mathod($symbol, $timeFrame, 150, 0);
+        $ema200 = $indicator->getEMA_Method($symbol, $timeFrame, 200, 0);
+        $candel = $indicator->getCandles_Method($symbol, $timeFrame, 1);
+        $jj = new JsonDecoder();
+        $rr = json_decode($candel);
+
+        $vv = $this->volumePositive($rr[0]->close, $rr[0]->open);
+        $cc = $this->collionEMAprice($ema200, $ma150, $rr[0]->low, $rr[0]->high);
+
+        Telegram::sendTelegram(
+            "Pair: " . $symbol . "\n" .
+            "EMA200 :" . Telegram::format($ema200) . "\n" .
+            "MA150 :" . Telegram::format($ma150) . "\n" .
+            "candel low :" . Telegram::format($rr[0]->low) . "\n" .
+            "candel high :" . Telegram::format($rr[0]->high) . "\n" .
+            "volume positive:" . $vv . "\n"
+        );
+        if ($vv && $cc) {
+            $price = $exchange->getPriceBinance($symbol);
+            Telegram::bigPump($symbol, $timeFrame, $price);
         }
     }
 
@@ -74,31 +118,29 @@ class StrategyController extends Controller
         $conditionShort += $conditionCross;
         $conditionShort += $riskRewardShort[0];
 
-        $grade+=$this->gradeForRSI($rsi,$conditionCross);
-        $grade+=$this->gradeForMacd($macdNow[0],$macdNow[1],$conditionCross);
-
+        $grade += $this->gradeForRSI($rsi, $conditionCross);
+        $grade += $this->gradeForMacd($macdNow[0], $macdNow[1], $conditionCross);
 
 
         if ($conditionLong == $maxConditionLong && $stopLossForLong != -100) {
             Telegram::textForStaregyTVT_Long($symbol, $timeFrame, $price, $resistance, $stopLossForLong, $grade, $riskRewardLong[2]);
         }
-        if ($conditionShort == $maxConditionShort && $stopLossForShort != 100)
-        {
-            Telegram::textForStaregyTVT_Short($symbol, $timeFrame, $price, $support, $stopLossForShort, $grade,$riskRewardShort[2]);
+        if ($conditionShort == $maxConditionShort && $stopLossForShort != 100) {
+            Telegram::textForStaregyTVT_Short($symbol, $timeFrame, $price, $support, $stopLossForShort, $grade, $riskRewardShort[2]);
         }
 
-        Telegram::sendTelegram("Pair: ".$symbol."\n"
-            ."timeframe: ".$timeFrame."\n"
-            ."riskreward: ".$riskRewardLong[2]."\n"
-            ."conditionLong: ".$conditionLong."\n"
-            ."conditionShort: ".$conditionShort."\n"
-            ."cross: ".$conditionCross."\n"
-            ."stopLoss: ".$stopLossForLong."\n"
-            ."GRADE: ".$grade."\n"
-            ."Fibos: ".$fibo0." ".$fibo236." ".$fibo382." ".$fibo618." ".$fibo786." ".$fibo1."\n"
-            ."RSI: ".$rsi."\n"
-            ."macdNow".$macdNow[0]."#".$macdNow[1]."#".$macdNow[2]."\n"
-            ."macdLater".$macdLater[0]."#".$macdLater[1]."#".$macdLater[2]."\n"
+        Telegram::sendTelegram("Pair: " . $symbol . "\n"
+            . "timeframe: " . $timeFrame . "\n"
+            . "riskreward: " . $riskRewardLong[2] . "\n"
+            . "conditionLong: " . $conditionLong . "\n"
+            . "conditionShort: " . $conditionShort . "\n"
+            . "cross: " . $conditionCross . "\n"
+            . "stopLoss: " . $stopLossForLong . "\n"
+            . "GRADE: " . $grade . "\n"
+            . "Fibos: " . $fibo0 . " " . $fibo236 . " " . $fibo382 . " " . $fibo618 . " " . $fibo786 . " " . $fibo1 . "\n"
+            . "RSI: " . $rsi . "\n"
+            . "macdNow" . $macdNow[0] . "#" . $macdNow[1] . "#" . $macdNow[2] . "\n"
+            . "macdLater" . $macdLater[0] . "#" . $macdLater[1] . "#" . $macdLater[2] . "\n"
         );
     }
 
@@ -106,18 +148,18 @@ class StrategyController extends Controller
     {
         $res = array();
         foreach ($all as $item) {
-            if ($price < $item ) {
+            if ($price < $item) {
                 array_push($res, $item);
             }
         }
-        $yy=array();
-        foreach ($res as $tt){
+        $yy = array();
+        foreach ($res as $tt) {
             $dif = Calculate::getDiffrentPercent($price, $tt);
-            if ($dif<=$telorance){
-            }else {
+            if ($dif <= $telorance) {
+            } else {
                 $rr = abs(Calculate::getDiffrentPercent($price, $tt) / 3);
                 $tt = Calculate::decPrice($tt, $rr);
-                array_push($yy,$tt);
+                array_push($yy, $tt);
             }
         }
         sort($yy);
@@ -130,17 +172,17 @@ class StrategyController extends Controller
         $res = array();
         foreach ($all as $item) {
 //            $dif = Calculate::getDiffrentPercent($item, $price);
-            if ($price > $item ) {
+            if ($price > $item) {
                 array_push($res, $item);
             }
         }
-        $yy=array();
+        $yy = array();
 //        $yy=$res;
-        foreach ($res as $tt){
+        foreach ($res as $tt) {
             $dif = Calculate::getDiffrentPercent($tt, $price);
-            if ($dif<=$telorance){
-            }else{
-                array_push($yy,$tt);
+            if ($dif <= $telorance) {
+            } else {
+                array_push($yy, $tt);
             }
         }
         rsort($yy);
@@ -166,16 +208,13 @@ class StrategyController extends Controller
     {
         if ($signal <= 0 && $macd <= 0 && $pumpOrDump == 10) {
             return 2;
-        }
-        elseif ($signal > 0 && $macd > 0 && $pumpOrDump == 10) {
+        } elseif ($signal > 0 && $macd > 0 && $pumpOrDump == 10) {
             return 1;
-        }elseif ($signal > 0 && $macd > 0 && $pumpOrDump == 1) {
+        } elseif ($signal > 0 && $macd > 0 && $pumpOrDump == 1) {
             return 2;
-        }
-        elseif ($signal < 0 && $macd < 0 && $pumpOrDump == 1) {
+        } elseif ($signal < 0 && $macd < 0 && $pumpOrDump == 1) {
             return 1;
-        }
-        else {
+        } else {
             return 0;
         }
     }
@@ -201,5 +240,4 @@ class StrategyController extends Controller
         } else
             return 0;
     }
-
 }

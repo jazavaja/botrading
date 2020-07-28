@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class Telegram extends Controller
 {
+
     public static function sendTelegram($text, $bot = "@test0version")
     {
         $textEncode = urlencode($text);
@@ -28,6 +29,28 @@ class Telegram extends Controller
         curl_close($ch);
         return $output;
     }
+    public static function format($number){
+
+        return number_format(floatval($number),8,".","");
+
+    }
+    public static function bigPump($pair, $time, $price)
+    {
+        $add = self::addAlerts($pair, $time);
+        if ($add) {
+            self::sendTelegram(
+                "LongPosition: " . $pair . "\n" .
+                $time . "\n" .
+                "priceNow : " . Telegram::format($price).
+                "Target1 3% : " . Telegram::format((Calculate::incPrice($price,3))).
+                "Target2 5% : " . Telegram::format((Calculate::incPrice($price,5))).
+                "Target3 7%: " . Telegram::format((Calculate::incPrice($price,7))).
+                "StopLoss 3%: " . Telegram::format((Calculate::decPrice($price,3)))
+                , "-1001465828957");
+            self::sendTelegram("Big Pump :" . $pair . "\n" . $time . "\n" . "priceNow : " . $price, "-1001266411642");
+        }
+    }
+
 
     public static function resistanceLines($all, $price)
     {

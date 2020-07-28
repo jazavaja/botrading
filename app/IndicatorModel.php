@@ -31,11 +31,16 @@ use Illuminate\Support\Carbon;
  * @method static Builder|IndicatorModel whereTimeFrame($value)
  * @method static Builder|IndicatorModel whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property-read \App\Func $nama
+ * @property-read \App\Timeframe $timeframe
  */
 class IndicatorModel extends Model
 {
     protected $table="indicator";
 
+    protected $casts=[
+        'setting'=>'array'
+    ];
     public function name(){
         return $this->belongsTo('App\func','name');
     }

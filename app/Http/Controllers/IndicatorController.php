@@ -40,6 +40,23 @@ class IndicatorController extends Controller
         }
     }
 
+    public function getCandles_Method($symbol,$timeFrame,$period=2)
+    {
+        $this->m_sleep($this->sleep);
+        $r="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InhvcmlyYTg0OTZAbmV0bWFpbDkuY29tIiwiaWF0IjoxNTkzOTc2NjI3LCJleHAiOjc5MDExNzY2Mjd9.GyQt8qO8h1n0v6KwFFA_FLruvSnq5NkUpxAlgXW6d5k";
+        $result=$this->requestTaapi("candles",$this->api,$symbol,$timeFrame,$period);
+        $res = json_decode($result);
+        if (!empty($res->value))
+        {
+            return $res->value;
+        }
+        else {
+
+            return $result;
+        }
+    }
+
+
     function m_sleep($milliseconds)
     {
         return usleep($milliseconds * 1000); // Microseconds->milliseconds
