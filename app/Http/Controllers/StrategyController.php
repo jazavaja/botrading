@@ -18,8 +18,9 @@ class StrategyController extends Controller
     {
         Telegram::removeAlert();
         $pair = Pair::get();
-        foreach ($pair as $item) {
-            SendAnalysis::dispatch($item);
+        foreach ($pair as $item)
+        {
+            SendAnalysis::dispatch($item,"1d","0");
         }
     }
 

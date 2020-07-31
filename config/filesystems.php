@@ -54,6 +54,10 @@ return [
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
+        'log' => [
+            'driver' => 'local',
+            'root' => storage_path('logs'),
+        ],
 
         's3' => [
             'driver' => 's3',
