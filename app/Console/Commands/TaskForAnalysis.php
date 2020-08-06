@@ -40,12 +40,12 @@ class TaskForAnalysis extends Command
      */
     public function handle()
     {
-        Telegram::removeAlert();
-        $pair = Pair::get();
-        foreach ($pair as $item)
-        {
-            SendAnalysis::dispatch($item,"1d","0");
-        }
+//        Telegram::removeAlert();
+//        $pair = Pair::get();
+//        foreach ($pair as $item)
+//        {
+//            SendAnalysis::dispatch($item,"1d","0");
+//        }
         Telegram::sendTelegram('JAVAD-COMMAND');
         return 0;
     }
