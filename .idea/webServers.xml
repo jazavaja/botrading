@@ -10,7 +10,14 @@
         </fileTransfer>
       </webServer>
       <webServer id="8c8409b7-76b4-4b65-84f2-99ad1e122a10" name="xs" url="http://171.22.26.130:2222/">
-        <fileTransfer host="171.22.26.47" port="21">
+        <fileTransfer accessType="SFTP" host="51.254.91.140" port="2233" sshConfigId="e2c97988-4df7-4ec5-8323-013f69219419" sshConfig="jazava@51.254.91.140:2233 agent" authAgent="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="62d95b9a-c149-4c65-a33a-8f3c13c1f2be" name="botNew" url="http://51.254.91.140/">
+        <fileTransfer host="51.254.91.140" port="21">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
