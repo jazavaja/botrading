@@ -4,8 +4,10 @@ Route::get('/start','StrategyController@doingAnalytics');
 
 Route::get('/work',function ()
 {
-    Storage::disk('log')->delete('laravel.log');
-    Artisan::call('queue:work');
+
+    echo  \App\Jobss::count();
+//    Storage::disk('log')->delete('laravel.log');
+//    Artisan::call('queue:work');
 
 });
 
