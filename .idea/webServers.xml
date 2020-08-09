@@ -9,8 +9,8 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="8c8409b7-76b4-4b65-84f2-99ad1e122a10" name="xs" url="http://171.22.26.130:2222/">
-        <fileTransfer accessType="SFTP" host="51.254.91.140" port="2233" sshConfigId="e2c97988-4df7-4ec5-8323-013f69219419" sshConfig="jazava@51.254.91.140:2233 agent" authAgent="true">
+      <webServer id="8c8409b7-76b4-4b65-84f2-99ad1e122a10" name="xs" url="http://171.22.26.130:2233/">
+        <fileTransfer accessType="SFTP" host="51.254.91.140" port="2233" sshConfigId="e2c97988-4df7-4ec5-8323-013f69219419" sshConfig="root@51.254.91.140:2233 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
