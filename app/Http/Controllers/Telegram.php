@@ -39,16 +39,8 @@ class Telegram extends Controller
     {
         $add = self::addAlerts($pair, $time);
         if ($add) {
-            self::sendTelegram(
-                "LongPosition: " . $pair . "\n" .
-                $time . "\n" .
-                "priceNow : " . Telegram::format($price) .
-                "Target1 3% : " . Telegram::format((Calculate::incPrice($price, 3))) .
-                "Target2 5% : " . Telegram::format((Calculate::incPrice($price, 5))) .
-                "Target3 7%: " . Telegram::format((Calculate::incPrice($price, 7))) .
-                "StopLoss 3%: " . Telegram::format((Calculate::decPrice($price, 3)))
-                , "-1001465828957");
-            self::sendTelegram("Big Pump :" . $pair . "\n" . $time . "\n" . "priceNow : " . $price, "-1001266411642");
+            Telegram::sendTelegram("LongPosition: " . $pair . "\n" . $time . "\n" . "priceNow : " . Telegram::format($price) . "Target1 3% : " . Telegram::format((Calculate::incPrice($price, 3))) . "Target2 5% : " . Telegram::format((Calculate::incPrice($price, 5))) . "Target3 7%: " . Telegram::format((Calculate::incPrice($price, 7))) . "StopLoss 3%: " . Telegram::format((Calculate::decPrice($price, 3))), "-1001465828957");
+            Telegram::sendTelegram("LongPosition.: " . $pair . "\n" . $time . "\n" . "priceNow : " . Telegram::format($price) . "Target1 3% : " . Telegram::format((Calculate::incPrice($price, 3))) . "Target2 5% : " . Telegram::format((Calculate::incPrice($price, 5))) . "Target3 7%: " . Telegram::format((Calculate::incPrice($price, 7))) . "StopLoss 3%: " . Telegram::format((Calculate::decPrice($price, 3))), "-1001266411642");
         }
     }
 
